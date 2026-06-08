@@ -65,7 +65,16 @@ GRCH37_FILE = os.path.join(
 )
 
 seqrepo_rest_service_url = "seqrepo+https://services.genomicmedlab.org/seqrepo"
-seqrepo_dataproxy = create_dataproxy(uri=seqrepo_rest_service_url)
+_seqrepo_dataproxy = None
+
+
+def get_seqrepo_dataproxy():
+    global _seqrepo_dataproxy
+
+    if _seqrepo_dataproxy is None:
+        _seqrepo_dataproxy = create_dataproxy(uri=seqrepo_rest_service_url)
+
+    return _seqrepo_dataproxy
 
 db = build_mongo_database()
 
@@ -223,30 +232,31 @@ def generate(dict_properties, args):
             refGen = refGen_complete.group(1)
             print("Found a valid reference genome: {} for file: {}".format(refGen, vcf_filename))
             try:
-                seqid1=seqrepo_dataproxy.translate_sequence_identifier("{}:1".format(refGen), "ga4gh")
-                seqid2=seqrepo_dataproxy.translate_sequence_identifier("{}:2".format(refGen), "ga4gh")
-                seqid3=seqrepo_dataproxy.translate_sequence_identifier("{}:3".format(refGen), "ga4gh")
-                seqid4=seqrepo_dataproxy.translate_sequence_identifier("{}:4".format(refGen), "ga4gh")
-                seqid5=seqrepo_dataproxy.translate_sequence_identifier("{}:5".format(refGen), "ga4gh")
-                seqid6=seqrepo_dataproxy.translate_sequence_identifier("{}:6".format(refGen), "ga4gh")
-                seqid7=seqrepo_dataproxy.translate_sequence_identifier("{}:7".format(refGen), "ga4gh")
-                seqid8=seqrepo_dataproxy.translate_sequence_identifier("{}:8".format(refGen), "ga4gh")
-                seqid9=seqrepo_dataproxy.translate_sequence_identifier("{}:9".format(refGen), "ga4gh")
-                seqid10=seqrepo_dataproxy.translate_sequence_identifier("{}:10".format(refGen), "ga4gh")
-                seqid11=seqrepo_dataproxy.translate_sequence_identifier("{}:11".format(refGen), "ga4gh")
-                seqid12=seqrepo_dataproxy.translate_sequence_identifier("{}:12".format(refGen), "ga4gh")
-                seqid13=seqrepo_dataproxy.translate_sequence_identifier("{}:13".format(refGen), "ga4gh")
-                seqid14=seqrepo_dataproxy.translate_sequence_identifier("{}:14".format(refGen), "ga4gh")
-                seqid15=seqrepo_dataproxy.translate_sequence_identifier("{}:15".format(refGen), "ga4gh")
-                seqid16=seqrepo_dataproxy.translate_sequence_identifier("{}:16".format(refGen), "ga4gh")
-                seqid17=seqrepo_dataproxy.translate_sequence_identifier("{}:17".format(refGen), "ga4gh")
-                seqid18=seqrepo_dataproxy.translate_sequence_identifier("{}:18".format(refGen), "ga4gh")
-                seqid19=seqrepo_dataproxy.translate_sequence_identifier("{}:19".format(refGen), "ga4gh")
-                seqid20=seqrepo_dataproxy.translate_sequence_identifier("{}:20".format(refGen), "ga4gh")
-                seqid21=seqrepo_dataproxy.translate_sequence_identifier("{}:21".format(refGen), "ga4gh")
-                seqid22=seqrepo_dataproxy.translate_sequence_identifier("{}:22".format(refGen), "ga4gh")
-                seqid23=seqrepo_dataproxy.translate_sequence_identifier("{}:X".format(refGen), "ga4gh")
-                seqid24=seqrepo_dataproxy.translate_sequence_identifier("{}:Y".format(refGen), "ga4gh")
+                dataproxy = get_seqrepo_dataproxy()
+                seqid1=dataproxy.translate_sequence_identifier("{}:1".format(refGen), "ga4gh")
+                seqid2=dataproxy.translate_sequence_identifier("{}:2".format(refGen), "ga4gh")
+                seqid3=dataproxy.translate_sequence_identifier("{}:3".format(refGen), "ga4gh")
+                seqid4=dataproxy.translate_sequence_identifier("{}:4".format(refGen), "ga4gh")
+                seqid5=dataproxy.translate_sequence_identifier("{}:5".format(refGen), "ga4gh")
+                seqid6=dataproxy.translate_sequence_identifier("{}:6".format(refGen), "ga4gh")
+                seqid7=dataproxy.translate_sequence_identifier("{}:7".format(refGen), "ga4gh")
+                seqid8=dataproxy.translate_sequence_identifier("{}:8".format(refGen), "ga4gh")
+                seqid9=dataproxy.translate_sequence_identifier("{}:9".format(refGen), "ga4gh")
+                seqid10=dataproxy.translate_sequence_identifier("{}:10".format(refGen), "ga4gh")
+                seqid11=dataproxy.translate_sequence_identifier("{}:11".format(refGen), "ga4gh")
+                seqid12=dataproxy.translate_sequence_identifier("{}:12".format(refGen), "ga4gh")
+                seqid13=dataproxy.translate_sequence_identifier("{}:13".format(refGen), "ga4gh")
+                seqid14=dataproxy.translate_sequence_identifier("{}:14".format(refGen), "ga4gh")
+                seqid15=dataproxy.translate_sequence_identifier("{}:15".format(refGen), "ga4gh")
+                seqid16=dataproxy.translate_sequence_identifier("{}:16".format(refGen), "ga4gh")
+                seqid17=dataproxy.translate_sequence_identifier("{}:17".format(refGen), "ga4gh")
+                seqid18=dataproxy.translate_sequence_identifier("{}:18".format(refGen), "ga4gh")
+                seqid19=dataproxy.translate_sequence_identifier("{}:19".format(refGen), "ga4gh")
+                seqid20=dataproxy.translate_sequence_identifier("{}:20".format(refGen), "ga4gh")
+                seqid21=dataproxy.translate_sequence_identifier("{}:21".format(refGen), "ga4gh")
+                seqid22=dataproxy.translate_sequence_identifier("{}:22".format(refGen), "ga4gh")
+                seqid23=dataproxy.translate_sequence_identifier("{}:X".format(refGen), "ga4gh")
+                seqid24=dataproxy.translate_sequence_identifier("{}:Y".format(refGen), "ga4gh")
                 seqMT='ga4gh:SQ.k3grVkjY-hoWcCUojHw6VU6GE3MZ8Sct'
             except Exception:
                 if refGen == 'GRCh38':

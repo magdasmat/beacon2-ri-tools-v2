@@ -14,3 +14,7 @@ scripts/datasheet/conf/__pycache__/*
 vcf_BelCovid_2
 output_docs/data/db/*
 refgen-data
+.venv/
+build/
+dist/
+*.egg-info/

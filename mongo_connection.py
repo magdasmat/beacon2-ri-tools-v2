@@ -55,6 +55,17 @@ def build_mongo_uri():
 
 
 def build_mongo_client():
+    tls_ca = os.getenv("BEACON_MONGO_TLS_CA")
+    tls_cert = os.getenv("BEACON_MONGO_TLS_CERT")
+
+    if tls_ca and tls_cert:
+        return MongoClient(
+            build_mongo_uri(),
+            tls=True,
+            tlsCAFile=tls_ca,
+            tlsCertificateKeyFile=tls_cert,
+            tlsAllowInvalidCertificates=True,
+        )
     return MongoClient(build_mongo_uri())
 
 

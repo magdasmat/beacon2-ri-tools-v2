@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beacon2-ri-tools-v2"
+version = "2.0.6+isciii.1"
+requires-python = ">=3.10"
+dependencies = [
+    "annotated-types",
+    "certifi",
+    "charset-normalizer",
+    "openpyxl",
+    "pandas",
+    "python-dateutil",
+    "tqdm",
+    "urllib3",
+    "cyvcf2",
+    "pymongo",
+    "dnspython",
+    "pydantic",
+    "pydantic-core",
+    "typing-extensions",
+    "rfc3339-validator",
+    "ga4gh.vrs[extras]",
+    "RefgenDetector",
+    "PyYAML",
+]
+
+[tool.setuptools]
+py-modules = [
+    "csv_to_bff",
+    "genomicVariations_vcf",
+    "genomicVariations_postprocessing",
+    "individuals_to_cohorts_csv",
+    "mongo_connection",
+    "remove_dataset",
+    "update_record",
+]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "validators*",
+    "conf*",
+    "pipelines*",
+    "ref_schemas*",
+    "vrs*",
+    "files",
+    "files.headers",
+    "files.headers.EUCAIM",
+    "files.deref_schemas",
+    "files.deref_schemas.EUCAIM",
+]
+exclude = [
+    "csv*",
+    "output_docs*",
+    "phenopackets-to-BFF*",
+    "scripts*",
+    "tests*",
+    "files.vcf*",
+    "files.updated_json*",
+]
+
+[tool.setuptools.package-data]
+"files.headers" = ["*.txt"]
+"files.headers.EUCAIM" = ["*.txt"]
+"files.deref_schemas" = ["*.json"]
+"files.deref_schemas.EUCAIM" = ["*.json"]
+"*" = [
+    "*.json",
+    "*.yml",
+    "*.yaml",
+    "*.txt",
+    "**/*.json",
+    "**/*.yml",
+    "**/*.yaml",
+    "**/*.txt",
+]

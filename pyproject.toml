@@ -22,7 +22,7 @@ dependencies = [
     "pydantic-core",
     "typing-extensions",
     "rfc3339-validator",
-    "ga4gh.vrs[extras]",
+    "ga4gh.vrs",
     "RefgenDetector",
     "PyYAML",
 ]

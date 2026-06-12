@@ -227,16 +227,16 @@ def generate(dict_properties, args):
                 continue
 
             execute_refgenDetector=execute_refgenDetector.decode("utf-8")
-        if args.verbosity==True:
-            print(execute_refgenDetector)
+            if args.verbosity==True:
+                print(execute_refgenDetector)
 
-        refGen_complete = re.search(r"Inferred Reference genome:\s*(\S+)", execute_refgenDetector)
-        if not refGen_complete:
-            print("Could not determine reference genome for file {}, this VCF will not get processed".format(vcf_filename))
-            continue
+            refGen_complete = re.search(r"Inferred Reference genome:\s*(\S+)", execute_refgenDetector)
+            if not refGen_complete:
+                print("Could not determine reference genome for file {}, this VCF will not get processed".format(vcf_filename))
+                continue
 
-        refGen = refGen_complete.group(1)
-        print("Found a valid reference genome: {} for file: {}".format(refGen, vcf_filename))
+            refGen = refGen_complete.group(1)
+            print("Found a valid reference genome: {} for file: {}".format(refGen, vcf_filename))
         try:
             dataproxy = get_seqrepo_dataproxy()
             seqid1=dataproxy.translate_sequence_identifier("{}:1".format(refGen), "ga4gh")
